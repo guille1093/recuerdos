@@ -3,6 +3,7 @@
 	import { page } from '$app/stores'
 	import Modal from './modal.svelte'
 	import Image from './photos/[id]/+page.svelte'
+	import CreateForm from '$lib/components/CreateForm.svelte';
 
 	export let data
 
@@ -37,9 +38,16 @@
 </Modal>
 
 <div class="feed">
+
+	<h1>Recuerdos</h1>
+	<!-- Total de recuerdos -->
+<h2>{data.thumbnails.length}</h2>
+
+<CreateForm />
+
 	{#each data.thumbnails as thumbnail}
 		<a on:click|preventDefault={showModal} href="/photos/{thumbnail.id}">
-			<img alt={thumbnail.alt} src={thumbnail.src} />
+			<img alt={thumbnail.alt} src={"https://still-team.pockethost.io/api/files/posts/" + thumbnail.id + "/" + thumbnail.img} />
 		</a>
 	{/each}
 </div>

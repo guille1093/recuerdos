@@ -1,9 +1,22 @@
 import { json } from '@sveltejs/kit'
+import PocketBase from 'pocketbase';
 
-export async function GET() {
-	const images = []
-	for (let i = 10; i < 20; i++) {
-		images.push({ id: i, alt: 'Placeholder', src: `https://picsum.photos/id/${i}/800` })
-	}
-	return json(images)
+const url = 'https://still-team.pockethost.io/'
+const client = new PocketBase(url)
+
+export async function GET(event) {
+	const posts = await client.collection('posts').getFullList({
+		sort: '-created',
+	});
+	return json(posts)
 }
+
+export async function POST(event)
+{
+	const formData = await event.request.formData()
+	console.log("formdata")
+	console.log(formData);
+	//const newPost = await client.collection('posts').create(data)
+	return json(formData);
+}
+
