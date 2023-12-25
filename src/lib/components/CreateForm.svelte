@@ -1,5 +1,23 @@
 <script lang="ts">
     let createModal: HTMLDialogElement;
+
+    const showPreview = async (event) => {
+        const target = event.target;
+        const files = target.files;
+
+        if (files.length > 0) {
+            const src = URL.createObjectURL(files[0]);
+            const preview = document.getElementById("avatar-preview");
+
+            if (preview) {
+                const preview = document.getElementById(
+                    "avatar-preview",
+                ) as HTMLImageElement;
+                preview.src = src;
+                preview.style.display = "block";
+            }
+        }
+    };
 </script>
 
 <button class="btn btn-ghost btn-circle" on:click={createModal.showModal()}
@@ -26,8 +44,11 @@
                 >✕</button
             >
         </form>
+
+        <img id="avatar-preview" class="hidden" alt="avatar" />
+
         <form action="/api/images" method="post" enctype="multipart/form-data">
-            <input type="file" name="img" />
+            <input type="file" name="img" on:change={showPreview} />
             <button class="btn" type="submit">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"

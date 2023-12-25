@@ -27,6 +27,8 @@
   "dependencies": {
     "@fontsource-variable/manrope": "^5.0.18",
     "@material-tailwind/html": "^2.1.2",
+    "@mattduffy/exiftool": "^1.5.0",
+    "exif-js": "^2.3.0",
     "pocketbase": "^0.20.1"
   }
 }

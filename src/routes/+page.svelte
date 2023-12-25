@@ -54,11 +54,3 @@
 		</a>
 	{/each}
 </div>
-
-<label class="swap swap-flip text-5xl z-30">
-	<!-- this hidden checkbox controls the state -->
-	<input type="checkbox" />
-
-	<div class="swap-on">🤍</div>
-	<div class="swap-off">💜</div>
-</label>
