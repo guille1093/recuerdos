@@ -34,10 +34,6 @@
 
 <NavBar />
 
-<!-- Total de recuerdos -->
-<h2>{data.thumbnails.length}</h2>
-
-<CreateForm />
 <div class="grid grid-cols-3 -mx-1">
 	{#each data.thumbnails as thumbnail}
 		<a
