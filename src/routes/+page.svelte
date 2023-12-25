@@ -42,12 +42,16 @@
 <h2>{data.thumbnails.length}</h2>
 
 <CreateForm />
-<div class="grid grid-cols-3 gap-1 p-1">
+<div class="grid grid-cols-3 -mx-1">
 	{#each data.thumbnails as thumbnail}
-		<a on:click|preventDefault={showModal} href="/photos/{thumbnail.id}">
-			<div>
+		<a
+			class="p-1"
+			on:click|preventDefault={showModal}
+			href="/photos/{thumbnail.id}"
+		>
+			<div class="aspect-square w-full overflow-hidden">
 				<img
-					class="object-cover object-center w-full h-40 max-w-full rounded-lg"
+					class="object-cover w-full h-full rounded-lg"
 					alt={thumbnail.alt}
 					src={"https://still-team.pockethost.io/api/files/posts/" +
 						thumbnail.id +
