@@ -1,6 +1,5 @@
 import { json } from '@sveltejs/kit'
 import PocketBase from 'pocketbase';
-import EXIF from "exif-js";
 
 const url = 'https://still-team.pockethost.io/'
 const client = new PocketBase(url)

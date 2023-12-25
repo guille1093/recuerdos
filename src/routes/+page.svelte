@@ -3,7 +3,6 @@
 	import { page } from "$app/stores";
 	import Modal from "./modal.svelte";
 	import Image from "./photos/[id]/+page.svelte";
-	import CreateForm from "$lib/components/CreateForm.svelte";
 	import NavBar from "$lib/components/NavBar.svelte";
 
 	export let data;
@@ -34,7 +33,7 @@
 
 <NavBar />
 
-<div class="grid grid-cols-3 -mx-1">
+<div class="grid grid-cols-3 mx-1">
 	{#each data.thumbnails as thumbnail}
 		<a
 			class="p-1"
@@ -48,7 +47,8 @@
 					src={"https://still-team.pockethost.io/api/files/posts/" +
 						thumbnail.id +
 						"/" +
-						thumbnail.img}
+						thumbnail.img +
+						"?thumb=300x300"}
 				/>
 			</div>
 		</a>
