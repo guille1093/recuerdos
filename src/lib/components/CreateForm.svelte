@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { enhance } from "$app/forms";
+
     let createModal: HTMLDialogElement;
 
     const showPreview = async (event) => {
@@ -17,6 +19,13 @@
                 preview.style.display = "block";
             }
         }
+    };
+
+    const submitCreate = () => {
+        return async ({ result }: { result: any }) => {
+            console.log(result);
+            window.location.href = "/photos/" + result.id;
+        };
     };
 </script>
 
@@ -47,7 +56,12 @@
 
         <img id="avatar-preview" class="hidden" alt="avatar" />
 
-        <form action="/api/images" method="post" enctype="multipart/form-data">
+        <form
+            action="/api/images"
+            method="post"
+            enctype="multipart/form-data"
+            use:enhance={submitCreate}
+        >
             <input type="file" name="img" on:change={showPreview} />
             <button class="btn" type="submit">
                 <svg
@@ -65,7 +79,7 @@
                     >
                     </path>
                 </svg>
-                <span>Crear recuerdo</span>
+                <span>Subir momento</span>
             </button>
         </form>
     </div>
