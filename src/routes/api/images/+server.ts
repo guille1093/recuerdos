@@ -11,12 +11,8 @@ export async function GET(event) {
 	return json(posts)
 }
 
-export async function POST(event)
-{
-	const formData = await event.request.formData()
-	console.log("formdata")
-	console.log(formData);
-	//const newPost = await client.collection('posts').create(data)
-	return json(formData);
+export async function POST(event) {
+	const formData = await event.request.formData();
+	const newPost = await client.collection('posts').create(formData);
+	return json(newPost);
 }
-

@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "@fontsource-variable/manrope": "^5.0.18",
+    "@material-tailwind/html": "^2.1.2",
     "pocketbase": "^0.20.1"
   }
 }

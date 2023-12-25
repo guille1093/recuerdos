@@ -1,33 +1,33 @@
 <script lang="ts">
-	import { goto, preloadData, pushState } from '$app/navigation'
-	import { page } from '$app/stores'
-	import Modal from './modal.svelte'
-	import Image from './photos/[id]/+page.svelte'
-	import CreateForm from '$lib/components/CreateForm.svelte';
+	import { goto, preloadData, pushState } from "$app/navigation";
+	import { page } from "$app/stores";
+	import Modal from "./modal.svelte";
+	import Image from "./photos/[id]/+page.svelte";
+	import CreateForm from "$lib/components/CreateForm.svelte";
 
-	export let data
+	export let data;
 
-	let modal: HTMLDialogElement
+	let modal: HTMLDialogElement;
 
 	async function showModal(e: MouseEvent) {
 		// get URL
-		const { href } = e.currentTarget as HTMLAnchorElement
+		const { href } = e.currentTarget as HTMLAnchorElement;
 
 		// get result of `load` function
-		const result = await preloadData(href)
-		console.log(result)
+		const result = await preloadData(href);
+		console.log(result);
 
 		// create new history entry
-		if (result.type === 'loaded' && result.status === 200) {
-			pushState(href, { selected: result.data })
-			modal.showModal()
+		if (result.type === "loaded" && result.status === 200) {
+			pushState(href, { selected: result.data });
+			modal.showModal();
 		} else {
-			goto(href)
+			goto(href);
 		}
 	}
 
 	function closeModal() {
-		history.back()
+		history.back();
 	}
 </script>
 
@@ -37,27 +37,24 @@
 	{/if}
 </Modal>
 
-<div class="feed">
-
-	<h1>Recuerdos</h1>
-	<!-- Total de recuerdos -->
+<h1>Recuerdos</h1>
+<!-- Total de recuerdos -->
 <h2>{data.thumbnails.length}</h2>
 
 <CreateForm />
-
+<div class="grid grid-cols-3 gap-1 p-1">
 	{#each data.thumbnails as thumbnail}
 		<a on:click|preventDefault={showModal} href="/photos/{thumbnail.id}">
-			<img alt={thumbnail.alt} src={"https://still-team.pockethost.io/api/files/posts/" + thumbnail.id + "/" + thumbnail.img} />
+			<div>
+				<img
+					class="object-cover object-center w-full h-40 max-w-full rounded-lg"
+					alt={thumbnail.alt}
+					src={"https://still-team.pockethost.io/api/files/posts/" +
+						thumbnail.id +
+						"/" +
+						thumbnail.img}
+				/>
+			</div>
 		</a>
 	{/each}
 </div>
-
-<style>
-	.feed {
-		max-inline-size: 600px;
-		display: grid;
-		gap: 2rem;
-		margin-inline: auto;
-		padding-block: 2rem;
-	}
-</style>
